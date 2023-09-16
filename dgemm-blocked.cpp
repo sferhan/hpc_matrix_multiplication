@@ -3,10 +3,9 @@
 const char* dgemm_desc = "Blocked dgemm.";
 
 void load_block_in_cache(int n, int block_size, int br, int bc, double* X) {
+   double* temp_mem = new double(block_size);
    for(int i=0; i<block_size; i++) {
-      for(int j=0; j<block_size; j++) {
-         double temp = X[col_major_transform(br*block_size+i, bc*block_size+j, n)];
-      }
+      memcpy(temp_mem, X+((br*block_size+i)*sizeof(double)), block_size*sizeof(double));
    }
 }
 
