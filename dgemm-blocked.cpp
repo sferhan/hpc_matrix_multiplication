@@ -1,4 +1,5 @@
 #include "helpers.cpp"
+#include <cstring>
 
 using namespace std;
 
