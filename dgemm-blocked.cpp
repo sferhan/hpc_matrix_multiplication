@@ -1,5 +1,7 @@
 #include "helpers.cpp"
 
+using namespace std;
+
 const char* dgemm_desc = "Blocked dgemm.";
 
 void load_block_in_cache(int n, int block_size, int br, int bc, double* X) {
