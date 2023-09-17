@@ -63,7 +63,7 @@ int main(int argc, char** argv)
     /* For each test size */
     for (int n : test_sizes) 
     {
-        printf("Working on problem size N=%d \n", n);
+        printf("\nWorking on problem size N=%d \n", n);
 
 #ifdef BLOCKED
         printf("Blocked DGEMM \n");
