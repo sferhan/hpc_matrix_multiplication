@@ -21,7 +21,7 @@ import matplotlib.pyplot as plt
 
 plot_fname = "myplot.png"
 
-fname = "memory_band_opt.csv"
+fname = "sample_data_3vars.csv"
 df = pd.read_csv(fname, comment="#")
 print(df)
 
@@ -36,10 +36,12 @@ problem_sizes = df[var_names[0]].values.tolist()
 code1_time = df[var_names[1]].values.tolist()
 code2_time = df[var_names[2]].values.tolist()
 code3_time = df[var_names[3]].values.tolist()
+code4_time = df[var_names[4]].values.tolist()
+code5_time = df[var_names[5]].values.tolist()
 
 plt.figure()
 
-plt.title("Analyzing Memory Bandwidth Utilization")
+plt.title("Analyzing MFLOP/s Naive MM and CBLAS MM")
 
 xlocs = [i for i in range(len(problem_sizes))]
 
@@ -48,14 +50,16 @@ plt.xticks(xlocs, problem_sizes)
 plt.plot(code1_time, "r-o")
 plt.plot(code2_time, "b-x")
 plt.plot(code3_time, "g-^")
+plt.plot(code4_time, "c-^")
+plt.plot(code5_time, "m-^")
 
 #plt.xscale("log")
 #plt.yscale("log")
 
 plt.xlabel("Problem Sizes")
-plt.ylabel("% Memory Bandwidth Utilization")
+plt.ylabel("MFLOP/s")
 
-varNames = [var_names[1], var_names[2], var_names[3]]
+varNames = [var_names[1], var_names[2], var_names[3], var_names[4], var_names[5]]
 plt.legend(varNames, loc="best")
 
 plt.grid(axis='both')

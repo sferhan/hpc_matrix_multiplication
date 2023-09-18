@@ -110,13 +110,9 @@ int main(int argc, char** argv)
            
            std::chrono::duration<double> elapsed = end_time - start_time;
            double elapsed_seconds = elapsed.count();
-#ifdef BLOCKED
             uint64_t n_= n;
-           double mflops = ((((n_*n_)/(b*b)) * ( (14*n_) + (6*n_*b*b) + (4*n_*b) + (14*b) )) / elapsed_seconds) / 1e6;
-#else
-            uint64_t n_= n;
-           double mflops = (((6*(n_*n_*n_)) + (4*(n_*n_))) / elapsed_seconds) / 1e6;
-#endif
+           double mflops = (((7*(n_*n_*n_)) + (2*(n_*n_))) / elapsed_seconds) / 1e6;
+
            std::cout<<" MFLOP/S ="<<mflops<<std::endl; 
            std::cout<<" Elapsed time for computation ="<<elapsed.count()<<std::endl; 
 
