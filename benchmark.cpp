@@ -17,6 +17,7 @@
 
 #include <cblas.h>
 #include <string.h>
+#include <cstdint>
 
 // external definitions for mmul's
 extern void square_dgemm(int, double*, double*, double*);
@@ -108,6 +109,15 @@ int main(int argc, char** argv)
               printf(" Error: your answer is not the same as that computed by BLAS. \n");
            
            std::chrono::duration<double> elapsed = end_time - start_time;
+           double elapsed_seconds = elapsed.count();
+#ifdef BLOCKED
+            uint64_t n_= n;
+           double mflops = ((((n_*n_)/(b*b)) * ( (14*n_) + (6*n_*b*b) + (4*n_*b) + (14*b) )) / elapsed_seconds) / 1e6;
+#else
+            uint64_t n_= n;
+           double mflops = (((6*(n_*n_*n_)) + (4*(n_*n_))) / elapsed_seconds) / 1e6;
+#endif
+           std::cout<<" MFLOP/S ="<<mflops<<std::endl; 
            std::cout<<" Elapsed time for computation ="<<elapsed.count()<<std::endl; 
 
 #ifdef BLOCKED

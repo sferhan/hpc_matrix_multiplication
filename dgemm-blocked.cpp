@@ -20,7 +20,6 @@ void write_block_to_mem(double* block, int n, int block_size, int br, int bc, do
 }
 
 void block_operate(
-   int xr, int xc, int yr, int yc, int blocks_count,
    int block_size, double* X, double* Y, double* Z
 ) {
    for(int i=0; i<block_size; i++) {
@@ -53,8 +52,7 @@ void square_dgemm_blocked(int n, int block_size, double* A, double* B, double* C
             load_block_in_cache(a_block, n, block_size, i, k, A);
             
             load_block_in_cache(b_block, n, block_size, k, j, B);
-
-            block_operate(i, k, k, j, nb, block_size, a_block, b_block, c_block);
+            block_operate(block_size, a_block, b_block, c_block);
          }
          write_block_to_mem(c_block, n, block_size, i, j, C);
       }   
